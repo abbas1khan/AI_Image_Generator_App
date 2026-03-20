@@ -44,9 +44,9 @@ const HomeContainer = () => {
         </View>
 
         <PromptInput
-          onGenerate={generateImage}
-          onSettingPress={() => settingsSheetRef.current?.showSheet()}
           isGenerating={states.isGenerating}
+          onSettingPress={() => settingsSheetRef.current?.showSheet()}
+          onGeneratePress={generateImage}
         />
 
         <DynamicBottomSheet ref={settingsSheetRef}>

@@ -12,16 +12,16 @@ import GradientBorderView from '../../../components/common/gradientborderview/Gr
 
 type PromptInputProps = {
   isGenerating: boolean;
-  onGenerate: (prompt: string) => void;
   onSettingPress: () => void;
+  onGeneratePress: (prompt: string) => void;
 };
 
 const offset = { closed: 0, opened: isAndroid ? 49 : 84 };
 
 const PromptInput = ({
   isGenerating,
-  onGenerate,
   onSettingPress,
+  onGeneratePress,
 }: PromptInputProps) => {
   const [prompt, setPrompt] = useState<string>('');
 
@@ -33,7 +33,7 @@ const PromptInput = ({
     if (!prompt?.trim()) return;
 
     KeyboardController.dismiss({ animated: true });
-    onGenerate(prompt?.trim());
+    onGeneratePress(prompt?.trim());
   };
 
   return (
