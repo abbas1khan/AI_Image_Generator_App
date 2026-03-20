@@ -155,7 +155,7 @@ const DynamicBottomSheet = React.forwardRef<IDynamicBottomSheetRef, IProps>(
             style={styles.background}
             onPress={hideBottomSheet}
           />
-          <Animated.View style={animatedSheetStyle} pointerEvents="auto">
+          <Animated.View pointerEvents="auto" style={animatedSheetStyle}>
             <GestureDetector gesture={pan}>
               <Animated.View
                 onLayout={handleContentLayout}
