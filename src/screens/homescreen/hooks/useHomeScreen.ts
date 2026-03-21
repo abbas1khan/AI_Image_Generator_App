@@ -22,7 +22,7 @@ const useHomeScreen = ({ googleAI }: UseHomeScreenProps) => {
     }
 
     states.setIsGenerating(true);
-    states.setImageUri(null);
+    states.setGeneratedImageData(null);
     states.setIsError(false);
 
     const finalPrompt = `Generate an image based on this prompt: ${prompt}`;
@@ -44,7 +44,7 @@ const useHomeScreen = ({ googleAI }: UseHomeScreenProps) => {
             modelData: states.selectedModel,
             aspectRatio: states.aspectRatio,
           });
-          states.setImageUri(imageData);
+          states.setGeneratedImageData(imageData);
           storeImage(imageData);
         } else {
           console.error(

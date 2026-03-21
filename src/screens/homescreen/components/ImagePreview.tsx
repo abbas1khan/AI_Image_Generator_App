@@ -2,22 +2,23 @@ import { ActivityIndicator, Image, StyleSheet, Text, View } from 'react-native';
 import React, { FC } from 'react';
 import { colors } from '../../../constants/colors';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
+import { ImageData } from '../../../store/types';
 
 interface ImagePreviewProps {
-  imageUri: string;
+  imageData: ImageData | null;
   aspectRatio: number;
   isGenerating: boolean;
 }
 
 const ImagePreview: FC<ImagePreviewProps> = ({
-  imageUri,
+  imageData,
   aspectRatio,
   isGenerating,
 }) => {
   return (
     <View style={[styles.container, { aspectRatio }]}>
-      {imageUri ? (
-        <Image source={{ uri: imageUri }} style={styles.image} />
+      {imageData?.imageUri ? (
+        <Image source={{ uri: imageData.imageUri }} style={styles.image} />
       ) : null}
 
       {isGenerating ? (

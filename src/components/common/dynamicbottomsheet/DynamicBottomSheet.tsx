@@ -99,7 +99,7 @@ const DynamicBottomSheet = React.forwardRef<IDynamicBottomSheetRef, IProps>(
         }
         showBottomSheet();
       }
-    }, [contentHeight, visible, showBottomSheet]);
+    }, [contentHeight, visible]);
 
     useImperativeHandle(ref, () => ({
       showSheet: () => {

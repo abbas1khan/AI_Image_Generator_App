@@ -36,7 +36,7 @@ const HomeContainer = () => {
         <View style={styles.imagePreviewParentContainer}>
           <View style={styles.imagePreviewContainer}>
             <ImagePreview
-              imageUri={states.imageUri?.imageUri || ''}
+              imageData={states.generatedImageData}
               isGenerating={states.isGenerating}
               aspectRatio={states.aspectRatio.value}
             />

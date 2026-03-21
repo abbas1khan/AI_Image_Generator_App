@@ -7,7 +7,8 @@ const useHomeScreenStates = () => {
   const [aspectRatio, setAspectRatio] = useState(ASPECT_RATIOS[0]);
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
-  const [imageUri, setImageUri] = useState<ImageData | null>(null);
+  const [generatedImageData, setGeneratedImageData] =
+    useState<ImageData | null>(null);
   const [selectedModel, setSelectedModel] = useState(AI_MODELS[0]);
 
   return {
@@ -17,8 +18,8 @@ const useHomeScreenStates = () => {
     setIsGenerating,
     isError,
     setIsError,
-    imageUri,
-    setImageUri,
+    generatedImageData,
+    setGeneratedImageData,
     selectedModel,
     setSelectedModel,
   };
