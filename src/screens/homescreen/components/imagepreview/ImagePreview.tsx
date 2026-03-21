@@ -1,8 +1,8 @@
 import { ActivityIndicator, Image, StyleSheet, Text, View } from 'react-native';
 import React, { FC } from 'react';
-import { colors } from '../../../constants/colors';
+import { colors } from '../../../../constants/colors';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
-import { ImageData } from '../../../store/types';
+import { ImageData } from '../../../../store/types';
 
 interface ImagePreviewProps {
   imageData: ImageData | null;

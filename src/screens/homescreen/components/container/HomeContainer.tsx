@@ -1,14 +1,14 @@
 import { ScrollView, StyleSheet, View } from 'react-native';
 import React from 'react';
-import Header from '../../../components/common/header/Header';
-import PromptInput from './PromptInput';
-import ImagePreview from './ImagePreview';
-import useHomeScreen from '../hooks/useHomeScreen';
+import Header from '../../../../components/common/header/Header';
+import PromptInput from '../promptinput/PromptInput';
+import ImagePreview from '../imagepreview/ImagePreview';
+import useHomeScreen from '../../hooks/useHomeScreen';
 import { GoogleGenAI } from '@google/genai';
 import { GOOGLE_API_KEY } from '@env';
 import DynamicBottomSheet, {
   IDynamicBottomSheetRef,
-} from '../../../components/common/dynamicbottomsheet/DynamicBottomSheet';
+} from '../../../../components/common/dynamicbottomsheet/DynamicBottomSheet';
 
 const API_KEY = GOOGLE_API_KEY;
 const googleAI = new GoogleGenAI({ apiKey: API_KEY });

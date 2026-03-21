@@ -1,7 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { colors } from '../../../constants/colors';
-import { FontFamily } from '../../../constants/layout';
+import { colors } from '../../../../constants/colors';
+import { FontFamily } from '../../../../constants/layout';
 
 type GenerateButtonProps = {
   isGenerating: boolean;

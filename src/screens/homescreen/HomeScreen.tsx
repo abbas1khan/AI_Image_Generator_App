@@ -2,7 +2,7 @@ import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import { colors } from '../../constants/colors';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import HomeContainer from './components/HomeContainer';
+import HomeContainer from './components/container/HomeContainer';
 
 const HomeScreen = () => {
   const { top } = useSafeAreaInsets();

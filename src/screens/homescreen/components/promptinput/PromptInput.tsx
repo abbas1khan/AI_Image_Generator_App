@@ -1,14 +1,14 @@
 import { StyleSheet, TextInput, View } from 'react-native';
 import React, { useState } from 'react';
-import { colors, gradientColors } from '../../../constants/colors';
-import { FontFamily } from '../../../constants/layout';
+import { colors, gradientColors } from '../../../../constants/colors';
+import { FontFamily } from '../../../../constants/layout';
 import {
   KeyboardController,
   KeyboardStickyView,
 } from 'react-native-keyboard-controller';
-import { isAndroid } from '../../../constants/appConstants';
-import GenerateButton from './GenerateButton';
-import GradientBorderView from '../../../components/common/gradientborderview/GradientBorderView';
+import { isAndroid } from '../../../../constants/appConstants';
+import GradientBorderView from '../../../../components/common/gradientborderview/GradientBorderView';
+import GenerateButton from '../generatebutton/GenerateButton';
 
 type PromptInputProps = {
   isGenerating: boolean;

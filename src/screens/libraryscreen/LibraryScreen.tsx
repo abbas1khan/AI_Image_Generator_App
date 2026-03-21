@@ -2,7 +2,7 @@ import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import { colors } from '../../constants/colors';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import LibraryContainer from './container/LibraryContainer';
+import LibraryContainer from './components/container/LibraryContainer';
 
 const LibraryScreen = () => {
   const { top } = useSafeAreaInsets();

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import PreviewContainer from './components/PreviewContainer';
+import PreviewContainer from './components/container/PreviewContainer';
 import { colors } from '../../constants/colors';
 import { ScreenNames } from '../../navigation/screennames';
 import { useAppRoute } from '../../hooks/useAppRoute';

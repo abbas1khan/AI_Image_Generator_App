@@ -1,10 +1,10 @@
 import { Button, Image, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { ImageData } from '../../../store/types';
-import { screenWidth } from '../../../constants/appConstants';
+import { ImageData } from '../../../../store/types';
+import { screenWidth } from '../../../../constants/appConstants';
 import { SnapbackZoom } from 'react-native-zoom-toolkit';
-import Header from '../../../components/common/header/Header';
-import { useAppNavigation } from '../../../hooks/useAppNavigation';
+import Header from '../../../../components/common/header/Header';
+import { useAppNavigation } from '../../../../hooks/useAppNavigation';
 
 interface PreviewContainerProps {
   imageData: ImageData;
