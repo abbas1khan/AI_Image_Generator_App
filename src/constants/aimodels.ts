@@ -1,4 +1,4 @@
-export const AI_MODELS = [
+export const AI_MODELS: IAIModel[] = [
   {
     name: 'Nano Banana',
     model: 'gemini-2.5-flash-image',
@@ -12,3 +12,8 @@ export const AI_MODELS = [
     model: 'gemini-3-pro-image-preview',
   },
 ];
+
+export interface IAIModel {
+  name: string;
+  model: string;
+}

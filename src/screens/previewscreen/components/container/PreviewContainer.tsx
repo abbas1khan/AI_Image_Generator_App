@@ -1,7 +1,6 @@
 import { Button, Image, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { ImageData } from '../../../../store/types';
-import { screenWidth } from '../../../../constants/appConstants';
 import { SnapbackZoom } from 'react-native-zoom-toolkit';
 import Header from '../../../../components/common/header/Header';
 import { useAppNavigation } from '../../../../hooks/useAppNavigation';
@@ -31,9 +30,8 @@ const PreviewContainer: React.FC<PreviewContainerProps> = ({ imageData }) => {
         <Image
           source={{ uri: imageData.imageUri }}
           style={{
-            width: screenWidth - 20,
+            width: '100%',
             aspectRatio: imageData.aspectRatio.value,
-            borderRadius: 12,
           }}
         />
       </SnapbackZoom>

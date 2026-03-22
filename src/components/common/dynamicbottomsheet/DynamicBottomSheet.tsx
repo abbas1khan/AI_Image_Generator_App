@@ -4,12 +4,14 @@ import {
   Pressable,
   StyleSheet,
   ViewStyle,
+  BackHandler,
 } from 'react-native';
 import React, {
   useCallback,
   useEffect,
   useImperativeHandle,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -24,8 +26,14 @@ import Animated, {
 } from 'react-native-reanimated';
 import { scheduleOnRN } from 'react-native-worklets';
 import { colors, gradientColors } from '../../../constants/colors';
-import { screenHeight, screenWidth } from '../../../constants/appConstants';
+import {
+  isAndroid,
+  screenHeight,
+  screenWidth,
+  windowHeight,
+} from '../../../constants/appConstants';
 import GradientBorderView from '../gradientborderview/GradientBorderView';
+import { Portal } from '@gorhom/portal';
 
 const ANIMATION_DURATION = 200;
 
@@ -63,9 +71,10 @@ const DynamicBottomSheet = React.forwardRef<IDynamicBottomSheetRef, IProps>(
     const [contentHeight, setContentHeight] = useState(0);
     const { top } = useSafeAreaInsets();
 
-    const defaultMaxHeight = screenHeight - top - 50;
+    const defaultMaxHeight = windowHeight - top - 50;
     const maxHeight = Math.min(contentHeight, defaultMaxHeight);
     const slideUp = useSharedValue(defaultMaxHeight);
+    const isSheetOpen = useRef(false);
 
     const animationConfig = useMemo(
       () => ({
@@ -74,6 +83,11 @@ const DynamicBottomSheet = React.forwardRef<IDynamicBottomSheetRef, IProps>(
       }),
       [duration],
     );
+
+    const hidePortal = useCallback(() => {
+      setVisible(false);
+      isSheetOpen.current = false;
+    }, []);
 
     const showBottomSheet = useCallback(() => {
       slideUp.value = withTiming(0, animationConfig, () => {
@@ -85,7 +99,7 @@ const DynamicBottomSheet = React.forwardRef<IDynamicBottomSheetRef, IProps>(
 
     const hideBottomSheet = useCallback(() => {
       slideUp.value = withTiming(maxHeight, animationConfig, () => {
-        scheduleOnRN(setVisible, false);
+        scheduleOnRN(hidePortal);
         if (onClose) {
           scheduleOnRN(onClose);
         }
@@ -93,13 +107,28 @@ const DynamicBottomSheet = React.forwardRef<IDynamicBottomSheetRef, IProps>(
     }, [maxHeight, animationConfig, onClose]);
 
     useEffect(() => {
-      if (contentHeight > 0 && visible) {
+      if (contentHeight > 0 && visible && !isSheetOpen.current) {
+        isSheetOpen.current = true;
         if (slideUp.value !== maxHeight) {
           slideUp.value = maxHeight;
         }
         showBottomSheet();
       }
     }, [contentHeight, visible]);
+
+    useEffect(() => {
+      if (isAndroid && visible) {
+        const backHandler = BackHandler.addEventListener(
+          'hardwareBackPress',
+          () => {
+            hideBottomSheet();
+            return true;
+          },
+        );
+
+        return () => backHandler.remove();
+      }
+    }, [visible, hideBottomSheet]);
 
     useImperativeHandle(ref, () => ({
       showSheet: () => {
@@ -112,7 +141,10 @@ const DynamicBottomSheet = React.forwardRef<IDynamicBottomSheetRef, IProps>(
     }));
 
     const handleContentLayout = useCallback((e: LayoutChangeEvent) => {
-      setContentHeight(e.nativeEvent.layout.height);
+      const heightValue = e?.nativeEvent?.layout?.height;
+      if (heightValue > 0) {
+        setContentHeight(heightValue);
+      }
     }, []);
 
     const animatedBackgroundColorStyle = useAnimatedStyle(() => {
@@ -147,8 +179,10 @@ const DynamicBottomSheet = React.forwardRef<IDynamicBottomSheetRef, IProps>(
       })
       .enabled(swipeDownToClose);
 
+    if (!visible) return null;
+
     return (
-      <Modal visible={visible} transparent onRequestClose={hideBottomSheet}>
+      <Portal hostName="settingsBottomSheet">
         <Animated.View style={[styles.container, animatedBackgroundColorStyle]}>
           <Pressable
             disabled={!dismissOnTapOutside}
@@ -158,6 +192,7 @@ const DynamicBottomSheet = React.forwardRef<IDynamicBottomSheetRef, IProps>(
           <Animated.View pointerEvents="auto" style={animatedSheetStyle}>
             <GestureDetector gesture={pan}>
               <Animated.View
+                collapsable={false}
                 onLayout={handleContentLayout}
                 style={[styles.bottomSheet, containerStyle]}
               >
@@ -171,7 +206,7 @@ const DynamicBottomSheet = React.forwardRef<IDynamicBottomSheetRef, IProps>(
             </GestureDetector>
           </Animated.View>
         </Animated.View>
-      </Modal>
+      </Portal>
     );
   },
 );
@@ -182,6 +217,7 @@ const styles = StyleSheet.create({
   container: {
     width: screenWidth,
     height: screenHeight,
+    position: 'absolute',
   },
   background: {
     flex: 1,

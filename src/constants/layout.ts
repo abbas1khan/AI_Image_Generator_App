@@ -120,16 +120,16 @@ export const FontSize = {
 // FONT FAMILIES
 // ─────────────────────────────────────────────
 
-export const FontFamily = {
-  Light: 'Onest-Light',
-  ExtraBold: 'Onest-ExtraBold',
-  ExtraLight: 'Onest-ExtraLight',
-  Medium: 'Onest-Medium',
-  Thin: 'Onest-Thin',
-  Bold: 'Onest-Bold',
-  SemiBold: 'Onest-SemiBold',
-  Regular: 'Onest-Regular',
-  Black: 'Onest-Black',
+export const fontFamily = {
+  light: 'Onest-Light',
+  extraBold: 'Onest-ExtraBold',
+  extraLight: 'Onest-ExtraLight',
+  medium: 'Onest-Medium',
+  thin: 'Onest-Thin',
+  bold: 'Onest-Bold',
+  semiBold: 'Onest-SemiBold',
+  regular: 'Onest-Regular',
+  black: 'Onest-Black',
 } as const;
 
 // ─────────────────────────────────────────────

@@ -1,7 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { colors } from '../../../../constants/colors';
-import { FontFamily } from '../../../../constants/layout';
+import { fontFamily } from '../../../../constants/layout';
 
 type GenerateButtonProps = {
   isGenerating: boolean;
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   text: {
     color: colors.white,
     fontSize: 16,
-    fontFamily: FontFamily.SemiBold,
+    fontFamily: fontFamily.semiBold,
     letterSpacing: 0.3,
   },
 });

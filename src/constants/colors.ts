@@ -67,6 +67,8 @@ export const colors = {
   /** Subtle surface border used on canvas */
   borderSubtle: '#1e1e38',
 
+  borderDark: '#2a2a45',
+
   // ─────────────────────────────────────────────
   // PRIMARY — Electric Indigo #7c6af7
   // The main brand accent used on CTAs, active states, icons

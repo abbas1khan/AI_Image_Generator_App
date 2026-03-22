@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ASPECT_RATIOS } from '../../../constants/aspectRatio';
 import { AI_MODELS } from '../../../constants/aimodels';
 import { ImageData } from '../../../store/types';
+import { STYLE_PRESETS } from '../../../constants/stylePresets';
 
 const useHomeScreenStates = () => {
   const [aspectRatio, setAspectRatio] = useState(ASPECT_RATIOS[0]);
@@ -10,6 +11,9 @@ const useHomeScreenStates = () => {
   const [generatedImageData, setGeneratedImageData] =
     useState<ImageData | null>(null);
   const [selectedModel, setSelectedModel] = useState(AI_MODELS[0]);
+  const [selectedStylePreset, setSelectedStylePreset] = useState(
+    STYLE_PRESETS[0],
+  );
 
   return {
     aspectRatio,
@@ -22,6 +26,8 @@ const useHomeScreenStates = () => {
     setGeneratedImageData,
     selectedModel,
     setSelectedModel,
+    selectedStylePreset,
+    setSelectedStylePreset,
   };
 };
 

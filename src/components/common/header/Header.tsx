@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, ViewStyle } from 'react-native';
 import React, { FC } from 'react';
 import { colors } from '../../../constants/colors';
-import { FontFamily } from '../../../constants/layout';
+import { fontFamily } from '../../../constants/layout';
 
 interface HeaderProps {
   label: string;
@@ -29,13 +29,13 @@ const styles = StyleSheet.create({
   headerLabel: {
     color: colors.primary,
     fontSize: 14,
-    fontFamily: FontFamily.Black,
+    fontFamily: fontFamily.black,
     letterSpacing: 4,
   },
   headerTitle: {
     color: colors.textPrimary,
     fontSize: 36,
-    fontFamily: FontFamily.Black,
+    fontFamily: fontFamily.black,
     letterSpacing: 2,
     lineHeight: 40,
   },

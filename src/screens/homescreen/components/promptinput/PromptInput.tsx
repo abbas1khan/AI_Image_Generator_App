@@ -1,12 +1,8 @@
 import { StyleSheet, TextInput, View } from 'react-native';
 import React, { useState } from 'react';
 import { colors, gradientColors } from '../../../../constants/colors';
-import { FontFamily } from '../../../../constants/layout';
-import {
-  KeyboardController,
-  KeyboardStickyView,
-} from 'react-native-keyboard-controller';
-import { isAndroid } from '../../../../constants/appConstants';
+import { fontFamily } from '../../../../constants/layout';
+import { KeyboardController } from 'react-native-keyboard-controller';
 import GradientBorderView from '../../../../components/common/gradientborderview/GradientBorderView';
 import GenerateButton from '../generatebutton/GenerateButton';
 
@@ -15,8 +11,6 @@ type PromptInputProps = {
   onSettingPress: () => void;
   onGeneratePress: (prompt: string) => void;
 };
-
-const offset = { closed: 0, opened: isAndroid ? 49 : 84 };
 
 const PromptInput = ({
   isGenerating,
@@ -29,6 +23,11 @@ const PromptInput = ({
     setPrompt(text);
   };
 
+  const handleSettingPress = () => {
+    KeyboardController.dismiss({ animated: true });
+    onSettingPress();
+  };
+
   const handleGenerate = () => {
     if (!prompt?.trim()) return;
 
@@ -37,38 +36,36 @@ const PromptInput = ({
   };
 
   return (
-    <KeyboardStickyView offset={offset}>
-      <GradientBorderView
-        colors={gradientColors.bottomSheet}
-        style={styles.gradientContainer}
-        innerContainerStyle={styles.gradientInnerContainer}
-      >
-        <View style={styles.container}>
-          <View style={styles.inputContainer}>
-            <TextInput
-              placeholder="Describe your imagination..."
-              placeholderTextColor={colors.textMuted}
-              value={prompt}
-              multiline
-              textAlignVertical="top"
-              style={styles.input}
-              onChangeText={handlePromptChange}
-            />
-          </View>
-
-          <View style={styles.buttonContainer}>
-            <GenerateButton
-              isGenerating={isGenerating}
-              onPress={onSettingPress}
-            />
-            <GenerateButton
-              isGenerating={isGenerating}
-              onPress={handleGenerate}
-            />
-          </View>
+    <GradientBorderView
+      colors={gradientColors.bottomSheet}
+      style={styles.gradientContainer}
+      innerContainerStyle={styles.gradientInnerContainer}
+    >
+      <View style={styles.container}>
+        <View style={styles.inputContainer}>
+          <TextInput
+            placeholder="Describe your imagination..."
+            placeholderTextColor={colors.textMuted}
+            value={prompt}
+            multiline
+            textAlignVertical="top"
+            style={styles.input}
+            onChangeText={handlePromptChange}
+          />
         </View>
-      </GradientBorderView>
-    </KeyboardStickyView>
+
+        <View style={styles.buttonContainer}>
+          <GenerateButton
+            isGenerating={isGenerating}
+            onPress={handleSettingPress}
+          />
+          <GenerateButton
+            isGenerating={isGenerating}
+            onPress={handleGenerate}
+          />
+        </View>
+      </View>
+    </GradientBorderView>
   );
 };
 
@@ -98,7 +95,7 @@ const styles = StyleSheet.create({
     color: colors.textPrimary,
     fontSize: 16,
     maxHeight: 107,
-    fontFamily: FontFamily.Regular,
+    fontFamily: fontFamily.regular,
   },
   buttonContainer: {
     flexDirection: 'row',

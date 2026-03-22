@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import Header from '../../../../components/common/header/Header';
 import PromptInput from '../promptinput/PromptInput';
@@ -6,9 +6,9 @@ import ImagePreview from '../imagepreview/ImagePreview';
 import useHomeScreen from '../../hooks/useHomeScreen';
 import { GoogleGenAI } from '@google/genai';
 import { GOOGLE_API_KEY } from '@env';
-import DynamicBottomSheet, {
-  IDynamicBottomSheetRef,
-} from '../../../../components/common/dynamicbottomsheet/DynamicBottomSheet';
+import { IDynamicBottomSheetRef } from '../../../../components/common/dynamicbottomsheet/DynamicBottomSheet';
+import SettingsBottomSheet from '../settingsbottomsheet/SettingsBottomSheet';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 
 const API_KEY = GOOGLE_API_KEY;
 const googleAI = new GoogleGenAI({ apiKey: API_KEY });
@@ -18,14 +18,7 @@ const HomeContainer = () => {
   const settingsSheetRef = React.useRef<IDynamicBottomSheetRef>(null);
 
   return (
-    <ScrollView
-      bounces={false}
-      overScrollMode="never"
-      bouncesZoom={false}
-      alwaysBounceVertical={false}
-      keyboardShouldPersistTaps="handled"
-      contentContainerStyle={styles.scrollViewContent}
-    >
+    <KeyboardAvoidingView behavior="padding" style={styles.container}>
       <View style={styles.container}>
         <Header
           label="AI IMAGE"
@@ -49,11 +42,9 @@ const HomeContainer = () => {
           onGeneratePress={generateImage}
         />
 
-        <DynamicBottomSheet ref={settingsSheetRef}>
-          <View style={{ height: 300 }} />
-        </DynamicBottomSheet>
+        <SettingsBottomSheet ref={settingsSheetRef} states={states} />
       </View>
-    </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -72,9 +63,7 @@ const styles = StyleSheet.create({
   imagePreviewParentContainer: {
     flex: 1,
     justifyContent: 'center',
-    marginBottom: 200,
+    paddingBottom: 200,
   },
-  imagePreviewContainer: {
-    marginTop: -20,
-  },
+  imagePreviewContainer: {},
 });
