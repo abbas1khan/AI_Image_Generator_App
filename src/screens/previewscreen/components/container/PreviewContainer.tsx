@@ -1,10 +1,17 @@
-import { Button, Image, StyleSheet, Text, View } from 'react-native';
+import {
+  Button,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import React from 'react';
 import { ImageData } from '../../../../store/types';
 import { SnapbackZoom } from 'react-native-zoom-toolkit';
-import Header from '../../../../components/common/header/Header';
 import { useAppNavigation } from '../../../../hooks/useAppNavigation';
 import { screenWidth, windowHeight } from '../../../../constants/appConstants';
+import { colors } from '../../../../constants/colors';
 
 interface PreviewContainerProps {
   imageData: ImageData;
@@ -14,18 +21,17 @@ const PreviewContainer: React.FC<PreviewContainerProps> = ({ imageData }) => {
   const navigation = useAppNavigation();
 
   return (
-    <View style={{ flex: 1 }}>
+    <ScrollView
+      bounces={false}
+      nestedScrollEnabled
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={styles.scrollContentContainer}
+    >
       <Button
         title="Back"
         onPress={() => {
           navigation.goBack();
         }}
-      />
-
-      <Header
-        label="IMAGE"
-        title="PREVIEW"
-        containerStyle={{ marginLeft: 16 }}
       />
 
       <SnapbackZoom>
@@ -39,10 +45,17 @@ const PreviewContainer: React.FC<PreviewContainerProps> = ({ imageData }) => {
           }}
         />
       </SnapbackZoom>
-    </View>
+
+      <Text style={{ color: colors.textPrimary }}>{imageData.prompt}</Text>
+    </ScrollView>
   );
 };
 
 export default PreviewContainer;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  scrollContentContainer: {
+    flexGrow: 1,
+    paddingBottom: 60,
+  },
+});
