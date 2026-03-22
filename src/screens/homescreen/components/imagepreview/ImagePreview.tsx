@@ -16,9 +16,12 @@ const ImagePreview: FC<ImagePreviewProps> = ({
   isGenerating,
 }) => {
   return (
-    <View style={[styles.container, { aspectRatio }]}>
+    <View style={[styles.container]}>
       {imageData?.imageUri ? (
-        <Image source={{ uri: imageData.imageUri }} style={styles.image} />
+        <Image
+          source={{ uri: imageData.imageUri }}
+          style={[styles.image, { aspectRatio: imageData.aspectRatio.value }]}
+        />
       ) : null}
 
       {isGenerating ? (
@@ -36,16 +39,17 @@ export default ImagePreview;
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 16,
-    overflow: 'hidden',
     marginHorizontal: 12,
+    maxHeight: '100%',
+    maxWidth: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   image: {
     width: '100%',
-    height: '100%',
-    zIndex: 1,
+    maxWidth: '100%',
+    maxHeight: '100%',
+    borderRadius: 12,
   },
   generationContainer: {
     width: '100%',

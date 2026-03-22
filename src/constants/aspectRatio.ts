@@ -1,4 +1,4 @@
-export const ASPECT_RATIOS = [
+export const ASPECT_RATIOS: IAspectRatio[] = [
   {
     text: '1:1',
     value: 1,
@@ -32,3 +32,8 @@ export const ASPECT_RATIOS = [
     value: 21 / 9,
   },
 ];
+
+export type IAspectRatio = {
+  text: string;
+  value: number;
+};

@@ -1,5 +1,5 @@
 import { StyleSheet, TextInput, View } from 'react-native';
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { colors, gradientColors } from '../../../../constants/colors';
 import { fontFamily } from '../../../../constants/layout';
 import { KeyboardController } from 'react-native-keyboard-controller';
@@ -12,11 +12,11 @@ type PromptInputProps = {
   onGeneratePress: (prompt: string) => void;
 };
 
-const PromptInput = ({
+const PromptInput: FC<PromptInputProps> = ({
   isGenerating,
   onSettingPress,
   onGeneratePress,
-}: PromptInputProps) => {
+}) => {
   const [prompt, setPrompt] = useState<string>('');
 
   const handlePromptChange = (text: string) => {
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
   },
   inputContainer: {
-    paddingVertical: 16,
+    paddingVertical: 12,
   },
   input: {
     paddingHorizontal: 18,

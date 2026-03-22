@@ -4,6 +4,7 @@ import { ImageData } from '../../../../store/types';
 import { SnapbackZoom } from 'react-native-zoom-toolkit';
 import Header from '../../../../components/common/header/Header';
 import { useAppNavigation } from '../../../../hooks/useAppNavigation';
+import { screenWidth, windowHeight } from '../../../../constants/appConstants';
 
 interface PreviewContainerProps {
   imageData: ImageData;
@@ -11,6 +12,7 @@ interface PreviewContainerProps {
 
 const PreviewContainer: React.FC<PreviewContainerProps> = ({ imageData }) => {
   const navigation = useAppNavigation();
+
   return (
     <View style={{ flex: 1 }}>
       <Button
@@ -30,8 +32,10 @@ const PreviewContainer: React.FC<PreviewContainerProps> = ({ imageData }) => {
         <Image
           source={{ uri: imageData.imageUri }}
           style={{
-            width: '100%',
+            width: screenWidth,
+            maxHeight: windowHeight * 0.65,
             aspectRatio: imageData.aspectRatio.value,
+            alignSelf: 'center',
           }}
         />
       </SnapbackZoom>

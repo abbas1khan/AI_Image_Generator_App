@@ -10,6 +10,7 @@ import DropDown from '../../../../components/common/dropdown/DropDown';
 import { AI_MODELS } from '../../../../constants/aimodels';
 import StyleList from './components/StyleList';
 import { isAndroid } from '../../../../constants/appConstants';
+import RatioList from './components/ratiolist/RatioList';
 
 interface SettingsBottomSheetProps {
   states: HomeScreenStates;
@@ -42,17 +43,22 @@ const SettingsBottomSheet = forwardRef<
         />
 
         <Text style={styles.sectionLabel}>ASPECT RATIO</Text>
+
+        <RatioList
+          selectedRatio={states.aspectRatio}
+          onPress={states.setAspectRatio}
+        />
       </View>
     </DynamicBottomSheet>
   );
 });
 
-export default SettingsBottomSheet;
+export default React.memo(SettingsBottomSheet);
 
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
-    paddingBottom: isAndroid ? 60 : 40,
+    paddingBottom: isAndroid ? 70 : 50,
   },
   dragKnob: {
     width: 45,

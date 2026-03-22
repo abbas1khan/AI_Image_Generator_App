@@ -58,12 +58,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    marginLeft: 16,
+    marginLeft: 12,
   },
   imagePreviewParentContainer: {
     flex: 1,
     justifyContent: 'center',
-    paddingBottom: 200,
+    paddingBottom: 215,
   },
-  imagePreviewContainer: {},
+  imagePreviewContainer: {
+    height: '100%',
+  },
 });
