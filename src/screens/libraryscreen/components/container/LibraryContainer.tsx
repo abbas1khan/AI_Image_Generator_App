@@ -79,6 +79,7 @@ const LibraryContainer = () => {
         drawDistance={500}
         keyExtractor={(image) => image.id}
         renderItem={renderImageCard}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );

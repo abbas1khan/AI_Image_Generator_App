@@ -16,7 +16,7 @@ const ImagePreview: FC<ImagePreviewProps> = ({
   isGenerating,
 }) => {
   return (
-    <View style={[styles.container]}>
+    <View style={styles.container}>
       {imageData?.imageUri ? (
         <Image
           source={{ uri: imageData.imageUri }}
@@ -40,6 +40,7 @@ export default ImagePreview;
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: 12,
+    height: '100%',
     maxHeight: '100%',
     maxWidth: '100%',
     justifyContent: 'center',
