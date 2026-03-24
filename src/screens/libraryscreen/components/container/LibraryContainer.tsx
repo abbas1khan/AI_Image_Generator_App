@@ -76,7 +76,6 @@ const LibraryContainer = () => {
         data={images}
         numColumns={2}
         masonry={true}
-        drawDistance={500}
         keyExtractor={(image) => image.id}
         renderItem={renderImageCard}
         showsVerticalScrollIndicator={false}

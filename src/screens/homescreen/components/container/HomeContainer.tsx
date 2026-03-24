@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     marginLeft: 12,
   },
   imagePreviewContainer: {
-    height: '100%',
-    paddingVertical: 12,
+    flex: 1,
+    paddingVertical: 16,
   },
 });

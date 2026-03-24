@@ -26,6 +26,6 @@ export const generateImageFromPrompt = async ({
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(DUMMY_RESPONSE);
-    }, 100);
+    }, 2000);
   });
 };

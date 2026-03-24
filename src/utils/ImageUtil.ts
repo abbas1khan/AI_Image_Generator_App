@@ -1,3 +1,6 @@
+import { IAIModel } from '../constants/aimodels';
+import { IAspectRatio } from '../constants/aspectRatio';
+import { IStylePreset } from '../constants/stylePresets';
 import { ImageData } from '../store/types';
 import uuid from 'react-native-uuid';
 
@@ -35,12 +38,14 @@ export const buildImageData = ({
   mimeType,
   modelData,
   aspectRatio,
+  stylePreset,
 }: {
   prompt: string;
   imageUri: string;
   mimeType: string;
-  modelData: { name: string; model: string };
-  aspectRatio: { text: string; value: number };
+  modelData: IAIModel;
+  aspectRatio: IAspectRatio;
+  stylePreset: IStylePreset;
 }): ImageData => {
   return {
     id: `${uuid.v4()}-${Date.now()}`,
@@ -50,5 +55,6 @@ export const buildImageData = ({
     createdAt: Date.now(),
     modelData,
     aspectRatio,
+    stylePreset,
   };
 };

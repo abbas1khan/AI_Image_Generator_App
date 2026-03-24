@@ -43,6 +43,7 @@ const useHomeScreen = ({ googleAI }: UseHomeScreenProps) => {
             mimeType,
             modelData: states.selectedModel,
             aspectRatio: states.aspectRatio,
+            stylePreset: states.selectedStylePreset,
           });
           states.setGeneratedImageData(imageData);
           storeImage(imageData);

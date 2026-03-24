@@ -1,17 +1,11 @@
-import {
-  Button,
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { Button, Image, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { ImageData } from '../../../../store/types';
 import { SnapbackZoom } from 'react-native-zoom-toolkit';
 import { useAppNavigation } from '../../../../hooks/useAppNavigation';
 import { screenWidth, windowHeight } from '../../../../constants/appConstants';
 import { colors } from '../../../../constants/colors';
+import { ScrollView } from 'react-native-gesture-handler';
 
 interface PreviewContainerProps {
   imageData: ImageData;
