@@ -23,13 +23,13 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { scheduleOnRN } from 'react-native-worklets';
-import { colors, gradientColors } from '../../../constants/colors';
+import { colors, gradientColors } from '../../constants/colors';
 import {
   isAndroid,
   screenHeight,
   screenWidth,
   windowHeight,
-} from '../../../constants/appConstants';
+} from '../../constants/appConstants';
 import GradientBorderView from '../gradientborderview/GradientBorderView';
 import { Portal } from '@gorhom/portal';
 

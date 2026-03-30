@@ -1,8 +1,8 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { IAIModel } from '../../../../constants/aimodels';
-import { colors } from '../../../../constants/colors';
-import { fontFamily } from '../../../../constants/layout';
+import { IAIModel } from '../../../constants/aimodels';
+import { colors } from '../../../constants/colors';
+import { fontFamily } from '../../../constants/layout';
 
 interface DropDownBodyProps {
   allData: IAIModel[];

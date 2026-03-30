@@ -2,11 +2,11 @@ import { StyleSheet, Text, View } from 'react-native';
 import React, { forwardRef } from 'react';
 import DynamicBottomSheet, {
   IDynamicBottomSheetRef,
-} from '../../../../components/common/dynamicbottomsheet/DynamicBottomSheet';
+} from '../../../../components/dynamicbottomsheet/DynamicBottomSheet';
 import { HomeScreenStates } from '../../hooks/useHomeScreenStates';
 import { fontFamily } from '../../../../constants/layout';
 import { colors } from '../../../../constants/colors';
-import DropDown from '../../../../components/common/dropdown/DropDown';
+import DropDown from '../../../../components/dropdown/DropDown';
 import { AI_MODELS } from '../../../../constants/aimodels';
 import StyleList from './components/StyleList';
 import { isAndroid } from '../../../../constants/appConstants';

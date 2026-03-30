@@ -7,7 +7,7 @@ import {
   KeyboardStickyView,
   useKeyboardHandler,
 } from 'react-native-keyboard-controller';
-import GradientBorderView from '../../../../components/common/gradientborderview/GradientBorderView';
+import GradientBorderView from '../../../../components/gradientborderview/GradientBorderView';
 import GenerateButton from '../generatebutton/GenerateButton';
 import {
   isAndroid,

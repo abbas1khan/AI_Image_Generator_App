@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react';
 import { StyleSheet, View } from 'react-native';
-import Header from '../../../../components/common/header/Header';
+import Header from '../../../../components/header/Header';
 import PromptInput from '../promptinput/PromptInput';
 import ImagePreview from '../imagepreview/ImagePreview';
 import useHomeScreen from '../../hooks/useHomeScreen';
-import { IDynamicBottomSheetRef } from '../../../../components/common/dynamicbottomsheet/DynamicBottomSheet';
+import { IDynamicBottomSheetRef } from '../../../../components/dynamicbottomsheet/DynamicBottomSheet';
 import SettingsBottomSheet from '../settingsbottomsheet/SettingsBottomSheet';
 
 const HomeContainer = () => {

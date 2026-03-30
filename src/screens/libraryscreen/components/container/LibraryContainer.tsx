@@ -2,7 +2,7 @@ import { StyleSheet, View, BackHandler } from 'react-native';
 import React, { useCallback, useEffect } from 'react';
 import { FlashList } from '@shopify/flash-list';
 import { useImageStore } from '../../../../store/imageStore';
-import Header from '../../../../components/common/header/Header';
+import Header from '../../../../components/header/Header';
 import ImageCard from '../imagecard/ImageCard';
 import { ImageData } from '../../../../store/types';
 import { isAndroid } from '../../../../constants/appConstants';

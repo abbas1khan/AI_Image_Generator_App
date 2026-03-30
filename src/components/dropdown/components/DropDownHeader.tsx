@@ -1,10 +1,10 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React, { FC } from 'react';
-import { IAIModel } from '../../../../constants/aimodels';
-import { colors } from '../../../../constants/colors';
-import { fontFamily } from '../../../../constants/layout';
-import Check from '../../../../../assets/svgs/check';
-import ChevronDown from '../../../../../assets/svgs/chevronDown';
+import { IAIModel } from '../../../constants/aimodels';
+import { colors } from '../../../constants/colors';
+import { fontFamily } from '../../../constants/layout';
+import Check from '../../../../assets/svgs/check';
+import ChevronDown from '../../../../assets/svgs/chevronDown';
 
 interface DropDownHeaderProps {
   selectedData: IAIModel;

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, ViewStyle } from 'react-native';
 import React, { FC } from 'react';
-import { colors } from '../../../constants/colors';
-import { fontFamily } from '../../../constants/layout';
+import { colors } from '../../constants/colors';
+import { fontFamily } from '../../constants/layout';
 
 interface HeaderProps {
   label: string;

@@ -2,7 +2,7 @@ import { StyleSheet, View } from 'react-native';
 import React, { FC, useState } from 'react';
 import DropDownHeader from './components/DropDownHeader';
 import DropDownBody from './components/DropDownBody';
-import { IAIModel } from '../../../constants/aimodels';
+import { IAIModel } from '../../constants/aimodels';
 
 interface DropDownProps {
   selectedData: IAIModel;
