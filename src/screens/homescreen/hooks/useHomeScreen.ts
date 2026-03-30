@@ -35,7 +35,6 @@ const useHomeScreen = () => {
         stylePresetValue: selectedStylePreset.value,
       });
 
-      // Preflight request; we only need the URL for FastImage.
       axios
         .get(url)
         .then(() => {

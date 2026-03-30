@@ -15,10 +15,6 @@ type GeneratePollinationsImageUriParams = {
   prompt: string;
   model: string;
   aspectRatio: IAspectRatio;
-  /**
-   * Style value is appended to the prompt string when non-empty.
-   * Example: `in anime illustration style`
-   */
   stylePresetValue: string;
 };
 
@@ -32,7 +28,9 @@ export const generatePollinationsImageUri = ({
   if (!trimmedPrompt) throw new Error('Prompt is required');
 
   const stylePart = stylePresetValue?.trim();
-  const finalPrompt = stylePart ? `${trimmedPrompt}, ${stylePart}` : trimmedPrompt;
+  const finalPrompt = stylePart
+    ? `${trimmedPrompt}, ${stylePart}`
+    : trimmedPrompt;
 
   const apiParams = {
     key: POLLINATIONS_API_KEY,
@@ -54,4 +52,3 @@ export const generatePollinationsImageUri = ({
 
   return url;
 };
-
