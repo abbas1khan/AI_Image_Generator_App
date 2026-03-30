@@ -6,10 +6,30 @@ import ImagePreview from '../imagepreview/ImagePreview';
 import useHomeScreen from '../../hooks/useHomeScreen';
 import { IDynamicBottomSheetRef } from '../../../../components/dynamicbottomsheet/DynamicBottomSheet';
 import SettingsBottomSheet from '../settingsbottomsheet/SettingsBottomSheet';
+import Toast, {
+  ToastRef,
+  ToastVariant,
+} from '../../../../components/toast/Toast';
+import { AxiosError } from 'axios';
 
 const HomeContainer = () => {
-  const { states, generateImage } = useHomeScreen();
   const settingsSheetRef = useRef<IDynamicBottomSheetRef>(null);
+  const toastRef = useRef<ToastRef>(null);
+
+  const { states, generateImage } = useHomeScreen({
+    onError: handleError,
+  });
+
+  function handleError(error: AxiosError) {
+    const data = error?.response?.data as { error?: { message?: string } };
+    toastRef?.current?.show({
+      variant: ToastVariant.Error,
+      title: 'Generation failed',
+      duration: 6000,
+      zIndex: 0,
+      description: data?.error?.message,
+    });
+  }
 
   const showSettingsSheet = useCallback(() => {
     settingsSheetRef.current?.showSheet();
@@ -42,6 +62,8 @@ const HomeContainer = () => {
             onImageLoad={handleImageLoad}
             onImageLoadError={handleImageLoadError}
           />
+
+          <Toast ref={toastRef} />
         </View>
 
         <PromptInput

@@ -1,11 +1,15 @@
 import { useCallback } from 'react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useImageStore } from '../../../store/imageStore';
 import useHomeScreenStates from './useHomeScreenStates';
 import { generatePollinationsImageUri } from '../../../services/pollinationsUrlBuilder';
 import { buildImageData } from '../../../utils/buildImageData';
 
-const useHomeScreen = () => {
+interface UseHomeScreenProps {
+  onError: (error: AxiosError) => void;
+}
+
+const useHomeScreen = ({ onError }: UseHomeScreenProps) => {
   const states = useHomeScreenStates();
   const storeImage = useImageStore((state) => state.storeImage);
 
@@ -34,7 +38,6 @@ const useHomeScreen = () => {
         aspectRatio,
         stylePresetValue: selectedStylePreset.value,
       });
-      console.log('🚀 ~ useHomeScreen.ts:37 ~ useHomeScreen ~ url:', url);
 
       axios
         .get(url)
@@ -51,15 +54,21 @@ const useHomeScreen = () => {
           storeImage(imageData);
         })
         .catch((error) => {
-          console.error(
-            'useHomeScreen.generateImage error:',
-            error?.response?.data,
-          );
+          onError?.(error);
           setIsGenerating(false);
           setIsError(true);
         });
     },
-    [aspectRatio, selectedModel, selectedStylePreset, storeImage],
+    [
+      aspectRatio,
+      selectedModel,
+      selectedStylePreset,
+      storeImage,
+      onError,
+      setGeneratedImageData,
+      setIsError,
+      setIsGenerating,
+    ],
   );
 
   return {
