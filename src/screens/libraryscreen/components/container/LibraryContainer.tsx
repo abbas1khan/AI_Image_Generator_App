@@ -1,4 +1,4 @@
-import { StyleSheet, View, Button, BackHandler } from 'react-native';
+import { StyleSheet, View, BackHandler } from 'react-native';
 import React, { useCallback, useEffect } from 'react';
 import { FlashList } from '@shopify/flash-list';
 import { useImageStore } from '../../../../store/imageStore';
@@ -36,6 +36,7 @@ const LibraryContainer = () => {
   useEffect(() => {
     const unsubscribe = navigation.addListener('blur', () => {
       if (selectedImageIds.size > 0) {
+        // deleteMultipleImages(Array.from(selectedImageIds));
         setSelectedImageIds(new Set());
       }
     });

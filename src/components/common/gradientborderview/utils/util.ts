@@ -34,15 +34,14 @@ export function getBorderStyles(flatStyle: ViewStyle) {
 }
 
 export function getStrippedStyle(flatStyle: ViewStyle) {
-  const {
-    borderWidth: _bw,
-    borderColor: _bc,
-    borderRadius: _br,
-    borderTopLeftRadius: _tl,
-    borderTopRightRadius: _tr,
-    borderBottomLeftRadius: _bl,
-    borderBottomRightRadius: _br2,
-    ...rest
-  } = flatStyle;
-  return rest;
+  // Remove border-related keys without binding unused variables.
+  const stripped: ViewStyle = { ...flatStyle };
+  delete stripped.borderWidth;
+  delete stripped.borderColor;
+  delete stripped.borderRadius;
+  delete stripped.borderTopLeftRadius;
+  delete stripped.borderTopRightRadius;
+  delete stripped.borderBottomLeftRadius;
+  delete stripped.borderBottomRightRadius;
+  return stripped;
 }

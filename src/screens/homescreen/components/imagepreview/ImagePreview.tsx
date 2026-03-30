@@ -1,10 +1,4 @@
-import {
-  ActivityIndicator,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React, { FC } from 'react';
 import { colors } from '../../../../constants/colors';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
@@ -12,17 +6,20 @@ import { ImageData } from '../../../../store/types';
 import { useAppNavigation } from '../../../../hooks/useAppNavigation';
 import { ScreenNames } from '../../../../navigation/screennames';
 import FastImage from '@d11/react-native-fast-image';
+import { fontFamily } from '../../../../constants/layout';
 
 interface ImagePreviewProps {
   imageData: ImageData | null;
   aspectRatio: number;
   isGenerating: boolean;
+  isError: boolean;
 }
 
 const ImagePreview: FC<ImagePreviewProps> = ({
   imageData,
   aspectRatio,
   isGenerating,
+  isError,
 }) => {
   const navigation = useAppNavigation();
 
@@ -58,6 +55,12 @@ const ImagePreview: FC<ImagePreviewProps> = ({
               </SkeletonPlaceholder>
             </View>
           ) : null}
+
+          {!isGenerating && isError ? (
+            <View style={styles.errorContainer}>
+              <Text style={styles.errorText}>Failed to generate image</Text>
+            </View>
+          ) : null}
         </View>
       )}
     </View>
@@ -91,11 +94,16 @@ const styles = StyleSheet.create({
     maxHeight: '100%',
     overflow: 'hidden',
   },
-  loadingContainer: {
+  errorContainer: {
     width: '100%',
-    height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'absolute',
+    paddingHorizontal: 12,
+  },
+  errorText: {
+    color: colors.textSecondary,
+    fontFamily: fontFamily.regular,
+    fontSize: 14,
+    textAlign: 'center',
   },
 });

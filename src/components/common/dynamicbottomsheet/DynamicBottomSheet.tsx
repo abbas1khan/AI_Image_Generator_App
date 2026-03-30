@@ -1,6 +1,5 @@
 import {
   LayoutChangeEvent,
-  Modal,
   Pressable,
   StyleSheet,
   ViewStyle,
@@ -22,7 +21,6 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
-  runOnJS,
 } from 'react-native-reanimated';
 import { scheduleOnRN } from 'react-native-worklets';
 import { colors, gradientColors } from '../../../constants/colors';

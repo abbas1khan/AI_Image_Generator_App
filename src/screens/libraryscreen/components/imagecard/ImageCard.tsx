@@ -1,4 +1,4 @@
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 import React from 'react';
 import { useAppNavigation } from '../../../../hooks/useAppNavigation';
 import { screenWidth } from '../../../../constants/appConstants';

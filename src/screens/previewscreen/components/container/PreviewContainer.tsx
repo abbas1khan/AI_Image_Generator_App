@@ -1,4 +1,4 @@
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text } from 'react-native';
 import React from 'react';
 import { ImageData } from '../../../../store/types';
 import { SnapbackZoom } from 'react-native-zoom-toolkit';

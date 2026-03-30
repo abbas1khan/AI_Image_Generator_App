@@ -1,7 +1,7 @@
 // src/navigation/BottomTabNavigator.tsx
 
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { colors } from '../constants/colors';
 import HomeScreen from '../screens/homescreen/HomeScreen';
