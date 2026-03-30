@@ -28,7 +28,7 @@ const ImagePreview: FC<ImagePreviewProps> = ({
   const navigation = useAppNavigation();
 
   const handleImagePress = () => {
-    if (!imageData) return;
+    if (!imageData?.imageUri) return;
 
     navigation.navigate(ScreenNames.PreviewScreen, {
       imageData,
