@@ -44,6 +44,10 @@ export const generatePollinationsImageUri = ({
     transparent: false,
     nologo: true,
   };
+  console.log(
+    '🚀 ~ pollinationsUrlBuilder.ts:47 ~ generatePollinationsImageUri ~ apiParams:',
+    apiParams,
+  );
 
   const API_PARAMS = buildUrlParams(apiParams);
   const url = `${API_BASE_URL}/${encodeURIComponent(

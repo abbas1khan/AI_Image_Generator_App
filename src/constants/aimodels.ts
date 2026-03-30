@@ -1,27 +1,15 @@
 export const AI_MODELS: IAIModel[] = [
   {
-    name: 'Flux',
+    name: 'Flux Schnell',
     model: 'flux',
   },
   {
-    name: 'ZImage',
+    name: 'Z-Image Turbo',
     model: 'zimage',
   },
   {
-    name: 'Klein',
+    name: 'FLUX.2 Klein 4B',
     model: 'klein',
-  },
-  {
-    name: 'GPT Image',
-    model: 'gptimage',
-  },
-  {
-    name: 'Grok Imagine',
-    model: 'grok-imagine',
-  },
-  {
-    name: 'Qwen Image',
-    model: 'qwen-image',
   },
 ];
 

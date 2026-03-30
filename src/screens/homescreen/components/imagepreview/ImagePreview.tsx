@@ -13,6 +13,8 @@ interface ImagePreviewProps {
   aspectRatio: number;
   isGenerating: boolean;
   isError: boolean;
+  onImageLoad: () => void;
+  onImageLoadError: () => void;
 }
 
 const ImagePreview: FC<ImagePreviewProps> = ({
@@ -20,6 +22,8 @@ const ImagePreview: FC<ImagePreviewProps> = ({
   aspectRatio,
   isGenerating,
   isError,
+  onImageLoad,
+  onImageLoadError,
 }) => {
   const navigation = useAppNavigation();
 
@@ -33,6 +37,25 @@ const ImagePreview: FC<ImagePreviewProps> = ({
 
   return (
     <View style={styles.container}>
+      <View style={[styles.generationContainer, { aspectRatio }]}>
+        {isGenerating ? (
+          <View style={{ overflow: 'hidden' }}>
+            <SkeletonPlaceholder
+              backgroundColor={colors.sheetBackground}
+              highlightColor={colors.primaryDim}
+            >
+              <SkeletonPlaceholder.Item width="100%" height="100%" />
+            </SkeletonPlaceholder>
+          </View>
+        ) : null}
+
+        {!isGenerating && isError ? (
+          <View style={styles.errorContainer}>
+            <Text style={styles.errorText}>Failed to generate image</Text>
+          </View>
+        ) : null}
+      </View>
+
       {imageData?.imageUri ? (
         <Pressable onPress={handleImagePress}>
           <FastImage
@@ -40,29 +63,12 @@ const ImagePreview: FC<ImagePreviewProps> = ({
               uri: imageData.imageUri,
               priority: FastImage.priority.high,
             }}
+            onLoad={onImageLoad}
+            onError={onImageLoadError}
             style={[styles.image, { aspectRatio: imageData.aspectRatio.value }]}
           />
         </Pressable>
-      ) : (
-        <View style={[styles.generationContainer, { aspectRatio }]}>
-          {isGenerating ? (
-            <View style={{ overflow: 'hidden' }}>
-              <SkeletonPlaceholder
-                backgroundColor={colors.sheetBackground}
-                highlightColor={colors.primaryDim}
-              >
-                <SkeletonPlaceholder.Item width="100%" height="100%" />
-              </SkeletonPlaceholder>
-            </View>
-          ) : null}
-
-          {!isGenerating && isError ? (
-            <View style={styles.errorContainer}>
-              <Text style={styles.errorText}>Failed to generate image</Text>
-            </View>
-          ) : null}
-        </View>
-      )}
+      ) : null}
     </View>
   );
 };
@@ -93,6 +99,7 @@ const styles = StyleSheet.create({
     maxWidth: '100%',
     maxHeight: '100%',
     overflow: 'hidden',
+    position: 'absolute',
   },
   errorContainer: {
     width: '100%',

@@ -15,6 +15,15 @@ const HomeContainer = () => {
     settingsSheetRef.current?.showSheet();
   }, []);
 
+  const handleImageLoad = useCallback(() => {
+    states.setIsGenerating(false);
+  }, [states]);
+
+  const handleImageLoadError = useCallback(() => {
+    states.setIsGenerating(false);
+    states.setIsError(true);
+  }, [states]);
+
   return (
     <View style={styles.container}>
       <Header
@@ -30,6 +39,8 @@ const HomeContainer = () => {
             isGenerating={states.isGenerating}
             aspectRatio={states.aspectRatio.value}
             isError={states.isError}
+            onImageLoad={handleImageLoad}
+            onImageLoadError={handleImageLoadError}
           />
         </View>
 

@@ -34,6 +34,7 @@ const useHomeScreen = () => {
         aspectRatio,
         stylePresetValue: selectedStylePreset.value,
       });
+      console.log('🚀 ~ useHomeScreen.ts:37 ~ useHomeScreen ~ url:', url);
 
       axios
         .get(url)
@@ -41,7 +42,6 @@ const useHomeScreen = () => {
           const imageData = buildImageData({
             prompt,
             imageUri: url,
-            mimeType: 'image/png',
             modelData: selectedModel,
             aspectRatio,
             stylePreset: selectedStylePreset,
@@ -50,12 +50,14 @@ const useHomeScreen = () => {
           setGeneratedImageData(imageData);
           storeImage(imageData);
         })
-        .catch((error: unknown) => {
+        .catch((error) => {
           console.error('useHomeScreen.generateImage error:', error);
-          setIsError(true);
-        })
-        .finally(() => {
+          console.error(
+            'useHomeScreen.generateImage error:',
+            error?.error?.message,
+          );
           setIsGenerating(false);
+          setIsError(true);
         });
     },
     [aspectRatio, selectedModel, selectedStylePreset, storeImage],

@@ -7,14 +7,12 @@ import uuid from 'react-native-uuid';
 export const buildImageData = ({
   prompt,
   imageUri,
-  mimeType,
   modelData,
   aspectRatio,
   stylePreset,
 }: {
   prompt: string;
   imageUri: string;
-  mimeType: string;
   modelData: IAIModel;
   aspectRatio: IAspectRatio;
   stylePreset: IStylePreset;
@@ -23,11 +21,9 @@ export const buildImageData = ({
     id: `${uuid.v4()}-${Date.now()}`,
     prompt,
     imageUri,
-    mimeType,
     createdAt: Date.now(),
     modelData,
     aspectRatio,
     stylePreset,
   };
 };
-
