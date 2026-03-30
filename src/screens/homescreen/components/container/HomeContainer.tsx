@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Header from '../../../../components/header/Header';
 import PromptInput from '../promptinput/PromptInput';
@@ -9,7 +9,7 @@ import SettingsBottomSheet from '../settingsbottomsheet/SettingsBottomSheet';
 
 const HomeContainer = () => {
   const { states, generateImage } = useHomeScreen();
-  const settingsSheetRef = React.useRef<IDynamicBottomSheetRef>(null);
+  const settingsSheetRef = useRef<IDynamicBottomSheetRef>(null);
 
   const showSettingsSheet = useCallback(() => {
     settingsSheetRef.current?.showSheet();

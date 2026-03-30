@@ -1,5 +1,11 @@
-import { Pressable, StyleSheet, TextInput, View } from 'react-native';
-import React, { FC, useState } from 'react';
+import {
+  LayoutChangeEvent,
+  Pressable,
+  StyleSheet,
+  TextInput,
+  View,
+} from 'react-native';
+import React, { FC, useCallback, useRef, useState } from 'react';
 import { colors, gradientColors } from '../../../../constants/colors';
 import { fontFamily } from '../../../../constants/layout';
 import {
@@ -15,6 +21,10 @@ import {
   screenWidth,
 } from '../../../../constants/appConstants';
 import { scheduleOnRN } from 'react-native-worklets';
+import Toast, {
+  ToastRef,
+  ToastVariant,
+} from '../../../../components/toast/Toast';
 
 type PromptInputProps = {
   isGenerating: boolean;
@@ -32,6 +42,9 @@ const PromptInput: FC<PromptInputProps> = ({
   const [prompt, setPrompt] = useState<string>('');
   const [overlayVisible, setOverlayVisible] = useState<boolean>(false);
 
+  const containerHeightRef = useRef<number>(0);
+  const toastRef = useRef<ToastRef>(null);
+
   const handlePromptChange = (text: string) => {
     setPrompt(text);
   };
@@ -39,19 +52,37 @@ const PromptInput: FC<PromptInputProps> = ({
   const handleSettingPress = () => {
     KeyboardController.dismiss({ animated: true });
     setOverlayVisible(false);
-    onSettingPress();
+    onSettingPress?.();
   };
 
   const handleGenerate = () => {
-    if (!prompt?.trim()) return;
+    if (!prompt?.trim()) {
+      toastRef.current?.show({
+        variant: ToastVariant.Warning,
+        title: 'Enter a prompt',
+        description: 'Please enter a prompt to generate an image.',
+        duration: 2000,
+        slideAnimationDuration: 250,
+        zIndex: 1,
+        verticalOffset: containerHeightRef.current + 16,
+      });
+      return;
+    }
 
     KeyboardController.dismiss({ animated: true });
-    onGeneratePress(prompt?.trim());
+    onGeneratePress?.(prompt?.trim());
   };
 
   const handleOverylayPress = () => {
     KeyboardController.dismiss({ animated: true });
   };
+
+  const handleContainerLayout = useCallback((e: LayoutChangeEvent) => {
+    const height = e.nativeEvent.layout.height;
+    if (height > 0) {
+      containerHeightRef.current = height;
+    }
+  }, []);
 
   useKeyboardHandler(
     {
@@ -67,10 +98,13 @@ const PromptInput: FC<PromptInputProps> = ({
   return (
     <KeyboardStickyView offset={keyboardOffset}>
       <View>
+        <Toast ref={toastRef} />
+
         <GradientBorderView
           colors={gradientColors.bottomSheet}
           style={styles.gradientContainer}
           innerContainerStyle={styles.gradientInnerContainer}
+          onLayout={handleContainerLayout}
         >
           <View style={styles.container}>
             <View style={styles.inputContainer}>
@@ -118,6 +152,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 24,
     backgroundColor: colors.sheetBackground,
     width: '100%',
+    zIndex: 2,
   },
   gradientInnerContainer: {
     overflow: 'hidden',
