@@ -5,6 +5,23 @@ PODS:
   - hermes-engine (250829098.0.9):
     - hermes-engine/Pre-built (= 250829098.0.9)
   - hermes-engine/Pre-built (250829098.0.9)
+  - libavif/core (0.11.1)
+  - libavif/libdav1d (0.11.1):
+    - libavif/core
+    - libdav1d (>= 0.6.0)
+  - libdav1d (1.2.0)
+  - libwebp (1.5.0):
+    - libwebp/demux (= 1.5.0)
+    - libwebp/mux (= 1.5.0)
+    - libwebp/sharpyuv (= 1.5.0)
+    - libwebp/webp (= 1.5.0)
+  - libwebp/demux (1.5.0):
+    - libwebp/webp
+  - libwebp/mux (1.5.0):
+    - libwebp/demux
+  - libwebp/sharpyuv (1.5.0)
+  - libwebp/webp (1.5.0):
+    - libwebp/sharpyuv
   - MMKVCore (2.4.0)
   - NitroMmkv (4.3.0):
     - hermes-engine
@@ -1972,6 +1989,34 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
+  - RNFastImage (8.13.0):
+    - hermes-engine
+    - libavif/core (~> 0.11.1)
+    - libavif/libdav1d (~> 0.11.1)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-Core-prebuilt
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - ReactNativeDependencies
+    - SDWebImage (>= 5.19.1)
+    - SDWebImageAVIFCoder (~> 0.11.0)
+    - SDWebImageSVGCoder (~> 1.7.0)
+    - SDWebImageWebPCoder (~> 0.14)
+    - Yoga
   - RNGestureHandler (2.30.0):
     - hermes-engine
     - RCTRequired
@@ -2231,6 +2276,17 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
+  - SDWebImage (5.21.7):
+    - SDWebImage/Core (= 5.21.7)
+  - SDWebImage/Core (5.21.7)
+  - SDWebImageAVIFCoder (0.11.1):
+    - libavif/core (>= 0.11.0)
+    - SDWebImage (~> 5.10)
+  - SDWebImageSVGCoder (1.7.0):
+    - SDWebImage/Core (~> 5.6)
+  - SDWebImageWebPCoder (0.15.0):
+    - libwebp (~> 1.0)
+    - SDWebImage/Core (~> 5.17)
   - Yoga (0.0.0)
 
 DEPENDENCIES:
@@ -2313,6 +2369,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - ReactNativeDependencies (from `../node_modules/react-native/third-party-podspecs/ReactNativeDependencies.podspec`)
   - "RNCMaskedView (from `../node_modules/@react-native-masked-view/masked-view`)"
+  - "RNFastImage (from `../node_modules/@d11/react-native-fast-image`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -2322,7 +2379,14 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - libavif
+    - libdav1d
+    - libwebp
     - MMKVCore
+    - SDWebImage
+    - SDWebImageAVIFCoder
+    - SDWebImageSVGCoder
+    - SDWebImageWebPCoder
 
 EXTERNAL SOURCES:
   BVLinearGradient:
@@ -2482,6 +2546,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/ReactNativeDependencies.podspec"
   RNCMaskedView:
     :path: "../node_modules/@react-native-masked-view/masked-view"
+  RNFastImage:
+    :path: "../node_modules/@d11/react-native-fast-image"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNReanimated:
@@ -2499,6 +2565,9 @@ SPEC CHECKSUMS:
   BVLinearGradient: cb006ba232a1f3e4f341bb62c42d1098c284da70
   FBLazyVector: e97c19a5a442429d1988f182a1940fb08df514da
   hermes-engine: eaeb9679f501f90e22e1fa0bce59ac5fe6c0167e
+  libavif: 84bbb62fb232c3018d6f1bab79beea87e35de7b7
+  libdav1d: 23581a4d8ec811ff171ed5e2e05cd27bad64c39f
+  libwebp: 02b23773aedb6ff1fd38cec7a77b81414c6842a8
   MMKVCore: 3d16ce9f7d411e135020915fde98a056859a1efa
   NitroMmkv: 880dee1e4b343bf2f2bf010fb8c2c68490632cfd
   NitroModules: 76063cb7bc1a21cf46d11b25abfcf1759bf0be47
@@ -2575,11 +2644,16 @@ SPEC CHECKSUMS:
   ReactCommon: 07572bf9e687c8a52fbe4a3641e9e3a1a477c78e
   ReactNativeDependencies: 2c495e243381b1f39ea153f5e877ab12a377f30d
   RNCMaskedView: d2578d41c59b936db122b2798ba37e4722d21035
+  RNFastImage: 2d36f4cfed9b2342f94f8591c8be69dd047ac67c
   RNGestureHandler: 07de6f059e0ee5744ae9a56feb07ee345338cc31
   RNReanimated: b18b23348b299d0f0b9bf9fc2688f6b4cff40152
   RNScreens: 6cb648bdad8fe9bee9259fe144df95b6d1d5b707
   RNSVG: c69f7709226108f5eb89b5aa8833c17a36345468
   RNWorklets: 30f9a363d681c776a5f9d74f6d21a6d1bb7bfe80
+  SDWebImage: e9fc87c1aab89a8ab1bbd74eba378c6f53be8abf
+  SDWebImageAVIFCoder: afe194a084e851f70228e4be35ef651df0fc5c57
+  SDWebImageSVGCoder: 15a300a97ec1c8ac958f009c02220ac0402e936c
+  SDWebImageWebPCoder: 0e06e365080397465cc73a7a9b472d8a3bd0f377
   Yoga: c0b3f2c7e8d3e327e450223a2414ca3fa296b9a2
 
 PODFILE CHECKSUM: 004b47d8e1b41032c20c8eebdff4cf6f35c5b0f0

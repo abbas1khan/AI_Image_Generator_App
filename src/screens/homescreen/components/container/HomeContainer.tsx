@@ -16,6 +16,10 @@ const HomeContainer = () => {
   const { states, generateImage } = useHomeScreen({ googleAI });
   const settingsSheetRef = React.useRef<IDynamicBottomSheetRef>(null);
 
+  const showSettinsSheet = () => {
+    settingsSheetRef.current?.showSheet();
+  };
+
   return (
     <View style={styles.container}>
       <Header
@@ -25,19 +29,17 @@ const HomeContainer = () => {
       />
 
       <View style={styles.container}>
-        <View style={styles.container}>
-          <View style={styles.imagePreviewContainer}>
-            <ImagePreview
-              imageData={states.generatedImageData}
-              isGenerating={states.isGenerating}
-              aspectRatio={states.aspectRatio.value}
-            />
-          </View>
+        <View style={styles.imagePreviewContainer}>
+          <ImagePreview
+            imageData={states.generatedImageData}
+            isGenerating={states.isGenerating}
+            aspectRatio={states.aspectRatio.value}
+          />
         </View>
 
         <PromptInput
           isGenerating={states.isGenerating}
-          onSettingPress={() => settingsSheetRef.current?.showSheet()}
+          onSettingPress={showSettinsSheet}
           onGeneratePress={generateImage}
         />
       </View>
@@ -58,6 +60,7 @@ const styles = StyleSheet.create({
   },
   imagePreviewContainer: {
     flex: 1,
-    paddingVertical: 16,
+    paddingTop: 4,
+    paddingBottom: 16,
   },
 });

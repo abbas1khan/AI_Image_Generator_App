@@ -11,6 +11,7 @@
     "bundle": "npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res"
   },
   "dependencies": {
+    "@d11/react-native-fast-image": "^8.13.0",
     "@google/genai": "^1.45.0",
     "@gorhom/portal": "^1.0.14",
     "@react-native-masked-view/masked-view": "^0.3.2",

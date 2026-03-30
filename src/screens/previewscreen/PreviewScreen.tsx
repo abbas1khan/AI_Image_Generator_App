@@ -9,7 +9,6 @@ import { useAppRoute } from '../../hooks/useAppRoute';
 const PreviewScreen = () => {
   const route = useAppRoute<ScreenNames.PreviewScreen>();
   const { top } = useSafeAreaInsets();
-
   const imageData = route.params?.imageData;
 
   return (

@@ -1,16 +1,33 @@
-import { generateImageFromPrompt } from '../../../services/googleservice';
+import axios from 'axios';
 import { useImageStore } from '../../../store/imageStore';
-import {
-  buildImageData,
-  convertBase64ToUri,
-  extractImageFromResponse,
-} from '../../../utils/ImageUtil';
 import useHomeScreenStates from './useHomeScreenStates';
 import { GoogleGenAI } from '@google/genai';
+import { API_BASE_URL, POLLINATIONS_API_KEY } from '@env';
+import uuid from 'react-native-uuid';
 
 type UseHomeScreenProps = {
   googleAI: GoogleGenAI;
 };
+
+enum Model {
+  GPT_IMAGE = 'gptimage',
+  FLUX = 'flux',
+  ZIMAGE = 'zimage',
+  KLEIN = 'klein',
+  GROK_IMAGINE = 'grok-imagine',
+  QWEN_IMAGE = 'qwen-image',
+}
+
+function randomInt() {
+  return Math.floor(Math.random() * 2147483648);
+}
+function buildUrlParams(params: Record<string, any>) {
+  const urlParams = new URLSearchParams();
+  Object.entries(params).forEach(([key, value]) => {
+    urlParams.append(key, value.toString());
+  });
+  return urlParams.toString();
+}
 
 const useHomeScreen = ({ googleAI }: UseHomeScreenProps) => {
   const states = useHomeScreenStates();
@@ -25,35 +42,46 @@ const useHomeScreen = ({ googleAI }: UseHomeScreenProps) => {
     states.setGeneratedImageData(null);
     states.setIsError(false);
 
-    const finalPrompt = `Generate an image based on this prompt: ${prompt}`;
-    await generateImageFromPrompt({
-      googleAI,
-      model: states.selectedModel.model,
-      prompt: finalPrompt,
-      aspectRatio: states.aspectRatio.text,
-    })
+    const apiParams = {
+      key: POLLINATIONS_API_KEY,
+      model: Model.FLUX,
+      width: states.aspectRatio.width,
+      height: states.aspectRatio.height,
+      seed: randomInt(),
+      // nonce: Date.now(),
+      enhance: false,
+      negative_prompt: 'blurry, worst quality, low-res',
+      safe: false,
+      transparent: false,
+      nologo: true,
+    };
+    const API_PARAMS = buildUrlParams(apiParams);
+    const url = `${API_BASE_URL}/${encodeURIComponent(prompt)}?${API_PARAMS}`;
+
+    console.log('🚀 ~ useHomeScreen.ts:65 ~ generateImage ~ url:', url);
+
+    // await new Promise((res) => {
+    //   setTimeout(() => {
+    //     res(null);
+    //   }, 1000);
+    // });
+
+    await axios
+      .get(url)
       .then((response) => {
-        const { imageBase64, mimeType, finishReason } =
-          extractImageFromResponse(response);
-        if (imageBase64 && mimeType) {
-          const finalImageUri = convertBase64ToUri(imageBase64, mimeType);
-          const imageData = buildImageData({
-            prompt,
-            imageUri: finalImageUri,
-            mimeType,
-            modelData: states.selectedModel,
-            aspectRatio: states.aspectRatio,
-            stylePreset: states.selectedStylePreset,
-          });
-          states.setGeneratedImageData(imageData);
-          storeImage(imageData);
-        } else {
-          console.error(
-            '🚀 ~ useHomeScreen.ts:49 ~ generateImage ~ finishReason:',
-            finishReason,
-          );
-          states.setIsError(true);
-        }
+        console.log('🚀 ~ useHomeScreen.ts:80 ~ generateImage ~ response:');
+        const imageData = {
+          id: `${uuid.v4()}-${Date.now()}`,
+          createdAt: Date.now(),
+          prompt,
+          imageUri: url,
+          mimeType: 'image/png',
+          modelData: states.selectedModel,
+          aspectRatio: states.aspectRatio,
+          stylePreset: states.selectedStylePreset,
+        };
+        states.setGeneratedImageData(imageData);
+        storeImage(imageData);
       })
       .catch((error) => {
         console.error(

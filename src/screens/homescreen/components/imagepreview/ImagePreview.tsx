@@ -1,6 +1,5 @@
 import {
   ActivityIndicator,
-  Image,
   Pressable,
   StyleSheet,
   Text,
@@ -12,6 +11,7 @@ import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import { ImageData } from '../../../../store/types';
 import { useAppNavigation } from '../../../../hooks/useAppNavigation';
 import { ScreenNames } from '../../../../navigation/screennames';
+import FastImage from '@d11/react-native-fast-image';
 
 interface ImagePreviewProps {
   imageData: ImageData | null;
@@ -38,8 +38,11 @@ const ImagePreview: FC<ImagePreviewProps> = ({
     <View style={styles.container}>
       {imageData?.imageUri ? (
         <Pressable onPress={handleImagePress}>
-          <Image
-            source={{ uri: imageData.imageUri }}
+          <FastImage
+            source={{
+              uri: imageData.imageUri,
+              priority: FastImage.priority.high,
+            }}
             style={[styles.image, { aspectRatio: imageData.aspectRatio.value }]}
           />
         </Pressable>

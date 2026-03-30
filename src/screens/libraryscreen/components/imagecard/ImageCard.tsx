@@ -6,26 +6,26 @@ import { ScreenNames } from '../../../../navigation/screennames';
 import { ImageData } from '../../../../store/types';
 import { colors } from '../../../../constants/colors';
 import Check from '../../../../../assets/svgs/check';
+import FastImage from '@d11/react-native-fast-image';
 
 interface ImageCardProps {
   imageData: ImageData;
   isSelected: boolean;
-  selectedImageIdsSize: number;
-  toggleSelection: (id: string) => void;
+  toggleSelection: (id: string, isTap?: boolean) => boolean;
 }
 
 const ImageCard = ({
   imageData,
   isSelected,
-  selectedImageIdsSize,
   toggleSelection,
 }: ImageCardProps) => {
   const navigation = useAppNavigation();
 
   const handlePress = () => {
-    if (selectedImageIdsSize > 0) {
-      toggleSelection(imageData.id);
-    } else {
+    const shouldNavigate = toggleSelection(imageData.id, true);
+
+    // If selection mode is not active, navigate to preview
+    if (shouldNavigate) {
       navigation.navigate(ScreenNames.PreviewScreen, {
         imageData: imageData,
       });
@@ -48,7 +48,7 @@ const ImageCard = ({
           isSelected && styles.selectedImageContainer,
         ]}
       >
-        <Image
+        <FastImage
           source={{ uri: imageData.imageUri }}
           style={[
             styles.image,
@@ -67,7 +67,12 @@ const ImageCard = ({
   );
 };
 
-export default React.memo(ImageCard);
+export default React.memo(ImageCard, (prevProps, nextProps) => {
+  return (
+    prevProps.imageData.id === nextProps.imageData.id &&
+    prevProps.isSelected === nextProps.isSelected
+  );
+});
 
 const styles = StyleSheet.create({
   container: {
