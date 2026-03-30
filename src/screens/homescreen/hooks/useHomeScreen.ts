@@ -51,10 +51,9 @@ const useHomeScreen = () => {
           storeImage(imageData);
         })
         .catch((error) => {
-          console.error('useHomeScreen.generateImage error:', error);
           console.error(
             'useHomeScreen.generateImage error:',
-            error?.error?.message,
+            error?.response?.data,
           );
           setIsGenerating(false);
           setIsError(true);
