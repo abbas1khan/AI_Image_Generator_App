@@ -1,6 +1,8 @@
 import { StyleSheet, View, BackHandler } from 'react-native';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
+import { useScrollToTop } from '@react-navigation/native';
 import { FlashList } from '@shopify/flash-list';
+import type { FlashListRef } from '@shopify/flash-list';
 import { useImageStore } from '../../../../store/imageStore';
 import Header from '../../../../components/header/Header';
 import ImageCard from '../imagecard/ImageCard';
@@ -13,6 +15,9 @@ const LibraryContainer = () => {
     new Set(),
   );
 
+  const listRef = useRef<FlashListRef<ImageData>>(null);
+  useScrollToTop(listRef);
+
   const navigation = useAppNavigation();
   const images = useImageStore((state) => state.images);
   const deleteMultipleImages = useImageStore(
@@ -20,17 +25,17 @@ const LibraryContainer = () => {
   );
 
   useEffect(() => {
-    if (isAndroid && selectedImageIds.size > 0) {
-      const backHandler = BackHandler.addEventListener(
-        'hardwareBackPress',
-        () => {
-          setSelectedImageIds(new Set());
-          return true;
-        },
-      );
+    if (!(isAndroid && selectedImageIds.size > 0)) return;
 
-      return () => backHandler.remove();
-    }
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      () => {
+        setSelectedImageIds(new Set());
+        return true;
+      },
+    );
+
+    return () => backHandler.remove();
   }, [selectedImageIds]);
 
   useEffect(() => {
@@ -90,6 +95,7 @@ const LibraryContainer = () => {
       </View>
 
       <FlashList
+        ref={listRef}
         data={images}
         numColumns={2}
         masonry={true}

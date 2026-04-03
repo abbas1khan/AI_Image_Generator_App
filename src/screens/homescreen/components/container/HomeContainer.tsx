@@ -25,9 +25,9 @@ const HomeContainer = () => {
     toastRef?.current?.show({
       variant: ToastVariant.Error,
       title: 'Generation failed',
+      description: data?.error?.message,
       duration: 6000,
       zIndex: 0,
-      description: data?.error?.message,
     });
   }
 
@@ -37,12 +37,18 @@ const HomeContainer = () => {
 
   const handleImageLoad = useCallback(() => {
     states.setIsGenerating(false);
-  }, [states]);
+  }, []);
 
   const handleImageLoadError = useCallback(() => {
     states.setIsGenerating(false);
     states.setIsError(true);
-  }, [states]);
+    toastRef?.current?.show({
+      variant: ToastVariant.Error,
+      title: 'Failed to load image',
+      description: 'Please try with a different prompt.',
+      zIndex: 0,
+    });
+  }, []);
 
   return (
     <View style={styles.container}>

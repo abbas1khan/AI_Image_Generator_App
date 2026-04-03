@@ -9,10 +9,7 @@ import {
 } from 'react-native-reanimated';
 import { scheduleOnRN } from 'react-native-worklets';
 import type { ToastConfig } from './types';
-
-const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
-
-const INITIAL_TRANSLATE_Y = Math.max(SCREEN_WIDTH, SCREEN_HEIGHT);
+import { screenHeight } from '../../constants/appConstants';
 
 export const DEFAULT_TOAST_DURATION_MS = 3000;
 export const DEFAULT_TOAST_SLIDE_MS = 250;
@@ -31,7 +28,7 @@ export function resolveToastTiming(config: ToastConfig) {
 }
 
 export function useToastAnimation() {
-  const translateY = useSharedValue(INITIAL_TRANSLATE_Y);
+  const translateY = useSharedValue(screenHeight);
   const opacity = useSharedValue(0);
   const cancelToken = useSharedValue(0);
 
