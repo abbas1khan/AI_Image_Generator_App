@@ -32,7 +32,7 @@ type PromptInputProps = {
   onGeneratePress: (prompt: string) => void;
 };
 
-const keyboardOffset = { closed: 0, opened: isAndroid ? 50 : 85 };
+const keyboardOffset = { closed: 0, opened: isAndroid ? 93 : 83 };
 
 const PromptInput: FC<PromptInputProps> = ({
   isGenerating,
