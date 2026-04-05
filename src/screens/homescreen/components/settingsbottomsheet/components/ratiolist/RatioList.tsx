@@ -20,8 +20,9 @@ const RatioList: FC<RadioListProps> = ({ selectedRatio, onPress }) => {
         return (
           <Pressable
             key={item.text}
-            style={[styles.ratioContainer]}
+            disabled={isSelected}
             onPress={() => onPress(item)}
+            style={[styles.ratioContainer]}
           >
             <View
               style={[
@@ -40,7 +41,7 @@ const RatioList: FC<RadioListProps> = ({ selectedRatio, onPress }) => {
   );
 };
 
-export default RatioList;
+export default React.memo(RatioList);
 
 const styles = StyleSheet.create({
   container: {

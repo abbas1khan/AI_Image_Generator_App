@@ -51,7 +51,7 @@ const StyleList: FC<StyleListProps> = ({ selectedStyle, onPress }) => {
   );
 };
 
-export default StyleList;
+export default React.memo(StyleList);
 
 const styles = StyleSheet.create({
   listContainer: {

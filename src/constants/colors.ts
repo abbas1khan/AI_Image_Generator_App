@@ -101,6 +101,8 @@ export const colors = {
   /** Selected chip border */
   primaryChipBorder: '#3d3580',
 
+  primaryLight: '#7C6AF71A',
+
   // ─────────────────────────────────────────────
   // ACCENT — Warm Amber #f0a500
   // Used on Save actions, model indicators, warnings

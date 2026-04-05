@@ -143,7 +143,7 @@ const PromptInput: FC<PromptInputProps> = ({
   );
 };
 
-export default PromptInput;
+export default React.memo(PromptInput);
 
 const styles = StyleSheet.create({
   gradientContainer: {

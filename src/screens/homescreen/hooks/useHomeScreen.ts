@@ -59,16 +59,7 @@ const useHomeScreen = ({ onError }: UseHomeScreenProps) => {
           setIsError(true);
         });
     },
-    [
-      aspectRatio,
-      selectedModel,
-      selectedStylePreset,
-      storeImage,
-      onError,
-      setGeneratedImageData,
-      setIsError,
-      setIsGenerating,
-    ],
+    [aspectRatio, selectedModel, selectedStylePreset, storeImage, onError],
   );
 
   return {

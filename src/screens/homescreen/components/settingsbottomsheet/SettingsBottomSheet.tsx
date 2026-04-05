@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useCallback } from 'react';
 import DynamicBottomSheet, {
   IDynamicBottomSheetRef,
 } from '../../../../components/dynamicbottomsheet/DynamicBottomSheet';
@@ -11,6 +11,7 @@ import { AI_MODELS } from '../../../../constants/aimodels';
 import StyleList from './components/StyleList';
 import { isAndroid } from '../../../../constants/appConstants';
 import RatioList from './components/ratiolist/RatioList';
+import { IAspectRatio } from '../../../../constants/aspectRatio';
 
 interface SettingsBottomSheetProps {
   states: HomeScreenStates;
@@ -20,6 +21,16 @@ const SettingsBottomSheet = forwardRef<
   IDynamicBottomSheetRef,
   SettingsBottomSheetProps
 >(({ states }, ref) => {
+  const handleRatioPress = useCallback(
+    (ratio: IAspectRatio) => {
+      states.setAspectRatio(ratio);
+      if (states.isError) {
+        states.setIsError(false);
+      }
+    },
+    [states.isError],
+  );
+
   return (
     <DynamicBottomSheet ref={ref}>
       <View style={styles.container}>
@@ -46,7 +57,7 @@ const SettingsBottomSheet = forwardRef<
 
         <RatioList
           selectedRatio={states.aspectRatio}
-          onPress={states.setAspectRatio}
+          onPress={handleRatioPress}
         />
       </View>
     </DynamicBottomSheet>

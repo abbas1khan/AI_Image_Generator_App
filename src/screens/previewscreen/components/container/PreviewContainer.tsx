@@ -1,4 +1,4 @@
-import { Button, StyleSheet, Text } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { ImageData } from '../../../../store/types';
 import { SnapbackZoom } from 'react-native-zoom-toolkit';
@@ -33,17 +33,20 @@ const PreviewContainer: React.FC<PreviewContainerProps> = ({ imageData }) => {
         }}
       />
 
-      <SnapbackZoom>
-        <FastImage
-          source={{ uri: imageData.imageUri }}
-          style={{
-            width: screenWidth,
-            maxHeight: windowHeight * 0.65,
-            aspectRatio: imageData.aspectRatio.value,
-            alignSelf: 'center',
-          }}
-        />
-      </SnapbackZoom>
+      <View style={{ zIndex: 100 }}>
+        <SnapbackZoom hitSlop={300}>
+          <FastImage
+            source={{ uri: imageData.imageUri }}
+            style={{
+              width: screenWidth,
+              maxHeight: windowHeight * 0.7,
+              aspectRatio: imageData.aspectRatio.value,
+              alignSelf: 'center',
+              zIndex: 100,
+            }}
+          />
+        </SnapbackZoom>
+      </View>
 
       <Text style={{ color: colors.textPrimary }}>{imageData.prompt}</Text>
     </ScrollView>

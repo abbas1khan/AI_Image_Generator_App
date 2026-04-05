@@ -45,7 +45,7 @@ const DropDown: FC<DropDownProps> = ({
   );
 };
 
-export default DropDown;
+export default React.memo(DropDown);
 
 const styles = StyleSheet.create({
   container: {

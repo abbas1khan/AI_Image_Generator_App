@@ -121,7 +121,7 @@ const Toast = forwardRef<ToastRef>((_, ref) => {
   );
 });
 
-export default Toast;
+export default React.memo(Toast);
 
 Toast.displayName = 'Toast';
 
